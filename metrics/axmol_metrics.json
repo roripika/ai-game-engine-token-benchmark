@@ -1,0 +1,20 @@
+{
+  "engine": "Axmol 2.11 (C++)",
+  "initial_output_tokens": 2648,
+  "scene_input_tokens": 0,
+  "debug_turns": 0,
+  "total_tokens": 2648,
+  "estimated_cost_usd": 0.0079,
+  "error_breakdown": {
+    "syntax_error": 0,
+    "reference_missing": 0,
+    "physics_logic_error": 0
+  },
+  "file_breakdown": {
+    "MainScene.cpp": 1580,
+    "Ball.cpp": 489,
+    "MainScene.h": 296,
+    "Ball.h": 162,
+    "CMakeLists.txt": 121
+  }
+}
