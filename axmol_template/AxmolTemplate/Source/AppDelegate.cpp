@@ -24,15 +24,15 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto scene = MainScene::createScene();
     director->runWithScene(scene);
 
-    // 1.5秒後にスクリーンショットを自動キャプチャして終了
+    // ボールが物理落下して蓄積する 2.5秒後に、純粋なゲーム画面のみを captureScreen で直接保存
     director->getScheduler()->schedule([](float) {
         utils::captureScreen([](bool succeed, std::string_view outputFile) {
             if (succeed) {
-                AXLOG("Saved axmol_screenshot.png at %s", outputFile.data());
+                AXLOG("Saved clean axmol_gameplay.png: %s", outputFile.data());
             }
             Director::getInstance()->end();
-        }, "axmol_screenshot.png");
-    }, scene, 1.5f, 0, 1.5f, false, "screenshot_key");
+        }, "axmol_gameplay.png");
+    }, scene, 2.5f, 0, 2.5f, false, "screenshot_key");
 
     return true;
 }
