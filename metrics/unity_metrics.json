@@ -1,20 +1,22 @@
 {
   "engine": "Unity 6 (C#)",
-  "initial_output_tokens": 2089,
-  "scene_input_tokens": 1879,
-  "debug_turns": 2,
-  "total_tokens": 3968,
-  "estimated_cost_usd": 0.0119,
+  "final_code_tokens": 3544,
+  "scene_input_tokens": 1434,
+  "debug_and_screenshot_turns": 2,
+  "total_tokens": 5263,
+  "estimated_cost_usd": 0.0158,
   "error_breakdown": {
-    "syntax_error": 0,
+    "syntax_error": 1,
     "reference_missing": 1,
-    "physics_logic_error": 1
+    "physics_logic_error": 0
   },
   "file_breakdown": {
-    "MainScene.unity": 1879,
-    "GameManager.cs": 1500,
+    "GameManager.cs": 2591,
+    "MainScene.unity": 1434,
     "TsumBall.cs": 455,
-    "UIManager.cs": 101,
+    "BuildScript.cs": 318,
+    "SetupScene.cs": 179,
+    "UIManager.cs": 147,
     "BallType.cs": 33
   }
 }

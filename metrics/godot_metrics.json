@@ -1,17 +1,18 @@
 {
   "engine": "Godot 4.6 (GDScript)",
-  "initial_output_tokens": 1857,
+  "final_code_tokens": 1634,
   "scene_input_tokens": 304,
-  "debug_turns": 1,
-  "total_tokens": 2161,
-  "estimated_cost_usd": 0.0065,
+  "project_config_tokens": 92,
+  "debug_and_screenshot_turns": 1,
+  "total_tokens": 2019,
+  "estimated_cost_usd": 0.0061,
   "error_breakdown": {
     "syntax_error": 1,
     "reference_missing": 0,
     "physics_logic_error": 0
   },
   "file_breakdown": {
-    "main.gd": 1179,
+    "main.gd": 1260,
     "ball.gd": 282,
     "main.tscn": 192,
     "ball.tscn": 112,
