@@ -19,6 +19,14 @@ func _ready() -> void:
 	_create_walls()
 	_spawn_initial_balls()
 	_update_score_ui()
+	get_tree().create_timer(1.5).timeout.connect(_take_screenshot)
+
+func _take_screenshot() -> void:
+	var img = get_viewport().get_texture().get_image()
+	img.save_png("godot_screenshot.png")
+	print("Saved godot_screenshot.png")
+	get_tree().quit()
+
 
 func _create_walls() -> void:
 	var viewport_size = get_viewport_rect().size

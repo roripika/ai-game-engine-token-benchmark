@@ -1,14 +1,21 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
+
+set(AX_ROOT "/Users/ooharayukio/ext/axmol")
+list(APPEND CMAKE_MODULE_PATH "${AX_ROOT}/cmake/Modules")
+
+include(AxmolBuildHelpers)
 
 project(AxmolTsumTsumu)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_subdirectory("${AX_ROOT}/core" ${CMAKE_BINARY_DIR}/axmol/core)
 
-# Axmol Engine 参照またはスタンドアロンソース構成
-file(GLOB_RECURSE GAME_SOURCES "Source/*.cpp" "Source/*.h")
+set(GAME_SOURCES
+    Source/AppDelegate.h
+    Source/AppDelegate.cpp
+    Source/MainScene.h
+    Source/MainScene.cpp
+    Source/Ball.h
+    Source/Ball.cpp
+)
 
-add_executable(${PROJECT_NAME} ${GAME_SOURCES})
-
-# Include directories
-target_include_directories(${PROJECT_NAME} PUBLIC Source)
+setup_axmol_app(AxmolTsumTsumu SOURCES ${GAME_SOURCES})

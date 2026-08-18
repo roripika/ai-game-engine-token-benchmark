@@ -1,18 +1,22 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace TsumTsumu
 {
     public class UIManager : MonoBehaviour
     {
-        [SerializeField] private Text scoreText;
+        private int currentScore = 0;
 
         public void SetScore(int score)
         {
-            if (scoreText != null)
-            {
-                scoreText.text = $"SCORE: {score}";
-            }
+            currentScore = score;
+        }
+
+        private void OnGUI()
+        {
+            GUIStyle style = new GUIStyle();
+            style.fontSize = 40;
+            style.normal.textColor = Color.white;
+            GUI.Label(new Rect(30, 40, 400, 100), $"SCORE: {currentScore}", style);
         }
     }
 }
