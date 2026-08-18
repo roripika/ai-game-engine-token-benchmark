@@ -3,24 +3,42 @@ import json
 import urllib.request
 import re
 import sys
+import subprocess
 
 TOKEN = "06baa7e4b5520cceb2a3dc7058ce518b50d6471e"
 ITEM_ID = "ea173f3df4ea85966b5f"
 API_URL = f"https://qiita.com/api/v2/items/{ITEM_ID}"
 
-GITHUB_RAW_BASE = "https://raw.githubusercontent.com/roripika/ai-game-engine-token-benchmark/main/metrics/screenshots/"
+def get_git_commit_hash():
+    try:
+        output = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd="/Users/ooharayukio/ai_token_test_tsumutsumu")
+        return output.decode("utf-8").strip()
+    except Exception:
+        return "main"
 
 def prepare_qiita_body(file_path: str) -> str:
+    commit_hash = get_git_commit_hash()
+    github_raw_base = f"https://raw.githubusercontent.com/roripika/ai-game-engine-token-benchmark/{commit_hash}/metrics/screenshots/"
+
     with open(file_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    content = content.replace("````carousel", "")
-    content = content.replace("````", "")
-    content = content.replace("<!-- slide -->", "\n\n")
-
-    content = re.sub(r'file:///[^\s)]+godot_screenshot\.png', GITHUB_RAW_BASE + 'godot_screenshot.png', content)
-    content = re.sub(r'file:///[^\s)]+axmol_screenshot\.png', GITHUB_RAW_BASE + 'axmol_screenshot.png', content)
-    content = re.sub(r'file:///[^\s)]+unity_screenshot\.png', GITHUB_RAW_BASE + 'unity_screenshot.png', content)
+    # ローカルファイルパスを 50% 幅指定の Qiita 用 img タグに置換
+    content = re.sub(
+        r'<img src="file:///[^\s)]+godot_screenshot\.png"[^>]*>',
+        f'<img src="{github_raw_base}godot_screenshot.png?v={commit_hash[:7]}" width="50%" alt="Godot 4.6 動作画面">',
+        content
+    )
+    content = re.sub(
+        r'<img src="file:///[^\s)]+axmol_screenshot\.png"[^>]*>',
+        f'<img src="{github_raw_base}axmol_screenshot.png?v={commit_hash[:7]}" width="50%" alt="Axmol 2.11 動作画面">',
+        content
+    )
+    content = re.sub(
+        r'<img src="file:///[^\s)]+unity_screenshot\.png"[^>]*>',
+        f'<img src="{github_raw_base}unity_screenshot.png?v={commit_hash[:7]}" width="50%" alt="Unity 6 動作画面">',
+        content
+    )
 
     return content.strip()
 
@@ -53,7 +71,7 @@ def update_article(title: str, body: str):
         with urllib.request.urlopen(req) as res:
             res_body = res.read().decode("utf-8")
             item = json.loads(res_body)
-            print("Successfully updated Qiita article!")
+            print("Successfully updated Qiita article with 50% width images and titles!")
             print(f"Article URL: {item.get('url')}")
             return item
     except urllib.error.HTTPError as e:

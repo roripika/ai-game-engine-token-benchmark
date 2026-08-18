@@ -5,21 +5,22 @@
 
 生成AI（LLM）を活用したゲーム開発が急速に普及する中、多くの開発者は「プロンプトの記述テクニック」や「エディタ連携プラグイン」に目が行きがちです。しかし、**ゲームエンジン自体のアーキテクチャ（言語仕様、データフォーマット、GUI依存度）の違いが、LLMのトークン消費量やコンテキスト圧迫、回答精度にどれほど大きな影響を与えるか**は、これまで定量的に比較されていませんでした。
 
-本記事では、同一仕様の **「2D物理パズルゲーム（ツムツum風）」** を、全く同一の条件で **Unity 6 (C#)**, **Godot 4.6 (GDScript)**, **Axmol 2.11 (C++)** の3つのエンジンでAI駆動開発を行い、実際にビルド・起動してスクリーンショット撮影・動作確認を完了するまでの **全ステップの消費トークン数・デバッグ往復ターン数・自律エラー率** を定量計測・比較した結果を報告します。
+本記事では、同一仕様の **「2D物理パズルゲーム（ツムツム風）」** を、全く同一の条件で **Unity 6 (C#)**, **Godot 4.6 (GDScript)**, **Axmol 2.11 (C++)** の3つのエンジンでAI駆動開発を行い、実際にビルド・起動してスクリーンショット撮影・動作確認を完了するまでの **全ステップの消費トークン数・デバッグ往復ターン数・自律エラー率** を定量計測・比較した結果を報告します。
 
 ---
 
 ## 1. 実機動作画面（ツムツム風パズルゲーム）
 
-AI駆動で自動生成・ビルド・起動し、実際に物理演算でボールが落下して累積されたゲーム画面です。
+AI駆動で自動生成・ビルド・起動し、実際に物理演算でボールが落下して累積された各エンジンのゲーム画面です。
 
-````carousel
-![Godot 4.6 動作画面](file:///Users/ooharayukio/.gemini/antigravity/brain/722df093-2fa8-4c77-ae24-1b8d958fcaff/godot_screenshot.png)
-<!-- slide -->
-![Axmol 2.11 動作画面](file:///Users/ooharayukio/.gemini/antigravity/brain/722df093-2fa8-4c77-ae24-1b8d958fcaff/axmol_screenshot.png)
-<!-- slide -->
-![Unity 6 動作画面](file:///Users/ooharayukio/.gemini/antigravity/brain/722df093-2fa8-4c77-ae24-1b8d958fcaff/unity_screenshot.png)
-````
+### 📌 Godot 4.6 (GDScript)
+<img src="file:///Users/ooharayukio/ai_token_test_tsumutsumu/metrics/screenshots/godot_screenshot.png" width="50%" alt="Godot 4.6 動作画面">
+
+### 📌 Axmol 2.11 (C++)
+<img src="file:///Users/ooharayukio/ai_token_test_tsumutsumu/metrics/screenshots/axmol_screenshot.png" width="50%" alt="Axmol 2.11 動作画面">
+
+### 📌 Unity 6 (C#)
+<img src="file:///Users/ooharayukio/ai_token_test_tsumutsumu/metrics/screenshots/unity_screenshot.png" width="50%" alt="Unity 6 動作画面">
 
 ---
 
